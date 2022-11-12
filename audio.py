@@ -1,2 +1,4 @@
+# import sys
+# sys.path.append("/opt/homebrew/lib/python3.10/site-packages")
 import playsound
-playsound.playsound('cc31ee1726b63e8.mp3', True)
+playsound.playsound('1.mp3', True)
