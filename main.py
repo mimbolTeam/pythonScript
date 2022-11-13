@@ -9,9 +9,10 @@ import playsound
 
 mp3_files = ["1.mp3", "2.mp3"]
 auto_timer = []
+dev_mode = True
 
 while True:
-    with open('times.json', 'r', encoding='utf8') as temp_file:
+    with open('times.json' if not dev_mode else 'times.dev.json', 'r', encoding='utf8') as temp_file:
         json_string = temp_file.read()
 
     data = json.loads(json_string)
@@ -19,9 +20,9 @@ while True:
 
     if auto_timer != [now.hour, now.minute]:
         auto_timer = []
-    first = [a for a in data if a[0][0] == now.hour and a[0]
+    first = [a for a in (data[datetime.datetime.weekday()] if not dev_mode else data) if a[0][0] == now.hour and a[0]
              [1] == now.minute and a[0] != auto_timer]
-    second = [a for a in data if a[1][0] == now.hour and a[1]
+    second = [a for a in (data[datetime.datetime.weekday()] if not dev_mode else data) if a[1][0] == now.hour and a[1]
              [1] == now.minute and a[1] != auto_timer]
     if first:
         auto_timer = first[0][0]
